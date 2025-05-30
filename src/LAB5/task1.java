@@ -1,11 +1,11 @@
-package Lab5;
+package LAB5;
 
 
 
 import java.util.Scanner;
 
 public class task1 {
-    public static void main(String[] args) {
+    public static void task1 (String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         double principal;
