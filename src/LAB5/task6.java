@@ -3,61 +3,44 @@ package LAB5;
 import java.util.Random;
 import java.util.Scanner;
 
-public class task6  {
-    public static void task6 (String[] args) {
+public class task6 {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
 
-        String[] options = {"rock", "paper", "scissors"};
-        String playerChoice;
-        String computerChoice;
-        String playAgain;
-
-        System.out.println("Welcome to Rock, Paper, Scissors!");
+        System.out.println("Game started!");
+        String play = "yes";
 
         do {
-            // 5. Считываем и проверяем выбор игрока
-            while (true) {
-                System.out.print("Enter your choice (rock, paper, scissors): ");
-                playerChoice = scanner.nextLine().trim().toLowerCase();
-                if (playerChoice.equals("rock") || playerChoice.equals("paper") || playerChoice.equals("scissors")) {
-                    break;
+            System.out.print("Enter your choice (rock, paper, scissors): ");
+            String userChoice = scanner.nextLine().toLowerCase();
+            boolean validChoice = false;
+            while (!validChoice) {
+                if (userChoice.equals("rock") || userChoice.equals("paper") || userChoice.equals("scissors")){
+                    validChoice = true;
                 } else {
-                    System.out.println("Invalid input. Please try again.");
+                    System.out.println("Invalid choice. Please enter rock, paper, or scissors");
+                    userChoice = scanner.nextLine().toLowerCase();
                 }
             }
-
-            // 6. Генерируем выбор компьютера
-            computerChoice = options[random.nextInt(options.length)];
+            String[] choices = {"rock", "paper", "scissors"};
+            String computerChoice = choices[random.nextInt(choices.length)];
             System.out.println("Computer chose: " + computerChoice);
 
-            // 7. Определяем победителя
-            if (playerChoice.equals(computerChoice)) {
-                System.out.println("It's a tie!");
-            } else if (
-                    (playerChoice.equals("rock") && computerChoice.equals("scissors")) ||
-                            (playerChoice.equals("scissors") && computerChoice.equals("paper")) ||
-                            (playerChoice.equals("paper") && computerChoice.equals("rock"))
-            ) {
+            if (userChoice.equals(computerChoice)){
+                System.out.println("It`s a tie!");
+            } else if (userChoice.equals("rock") && computerChoice.equals("scissors") ||
+                    userChoice.equals("paper") && computerChoice.equals("rock") ||
+                    userChoice.equals("scissors") && computerChoice.equals("paper")) {
+
                 System.out.println("You win!");
-            } else {
-                System.out.println("Computer wins!");
+            }else {
+                System.out.println("You lose!");
             }
-
-            // 9. Спрашиваем, хочет ли игрок сыграть еще раз
             System.out.print("Do you want to play again? (yes/no): ");
-            playAgain = scanner.nextLine().trim().toLowerCase();
-
-            while (!playAgain.equals("yes") && !playAgain.equals("no")) {
-                System.out.print("Please enter 'yes' or 'no': ");
-                playAgain = scanner.nextLine().trim().toLowerCase();
-            }
-
-        } while (playAgain.equals("yes"));
-
-        // 10. Финальное сообщение и закрытие сканера
+            play = scanner.nextLine().toLowerCase();
+        }while (play.equals("yes"));
         System.out.println("Thanks for playing!");
         scanner.close();
     }
 }
-

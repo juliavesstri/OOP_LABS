@@ -1,75 +1,79 @@
 package LAB5;
 
-
 import java.util.Scanner;
 
-public class task3 {
-    static void task3 (String[] args) {
+public class task3  {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        double firstNumber;
+        String choice;
+        double secondNumber;
 
-        // 2. Объявляем переменные
-        double num1, num2, result = 0;
-        char operator;
+        System.out.println("*** Меню ***");
+        System.out.println("Плюс (+)");
+        System.out.println("минус (-)");
+        System.out.println("множення (*)");
+        System.out.println("ділення (/)");
+        System.out.println("до степеня (^)");
+        System.out.println("вихід");
+        System.out.print("введіть перше число  ");
+        firstNumber = scanner.nextDouble();
+        System.out.print("Оберіть операцію(+, -, *, /, ^): ");
+        choice = scanner.next();
 
-        // 3. Запрашиваем данные у пользователя
-        System.out.print("Enter first number: ");
-        while (!scanner.hasNextDouble()) {
-            System.out.print("Invalid input. Enter a valid number: ");
-            scanner.next();
-        }
-        num1 = scanner.nextDouble();
+        System.out.print("введіть друге число ");
+        secondNumber = scanner.nextDouble();
 
-        System.out.print("Enter operator (+, -, *, /, ^): ");
-        operator = scanner.next().charAt(0);
-
-        System.out.print("Enter second number: ");
-        while (!scanner.hasNextDouble()) {
-            System.out.print("Invalid input. Enter a valid number: ");
-            scanner.next();
-        }
-        num2 = scanner.nextDouble();
-
-        boolean validOperation = true;
-
-        // 4. Выбор операции с помощью switch
-        switch (operator) {
-            case '+':
-                result = num1 + num2;
+        switch (choice){
+            case "+":
+                plus(firstNumber, secondNumber);
                 break;
-
-            case '-':
-                result = num1 - num2;
+            case "-":
+                minus(firstNumber, secondNumber);
                 break;
-
-            case '*':
-                result = num1 * num2;
+            case "*":
+                multiply(firstNumber, secondNumber);
                 break;
-
-            case '/':
-                // 5. Проверка деления на ноль
-                if (num2 == 0) {
-                    System.out.println("Error: Division by zero is not allowed.");
-                    validOperation = false;
-                } else {
-                    result = num1 / num2;
-                }
+            case "/":
+                divide(firstNumber, secondNumber);
                 break;
-
-            case '^':
-                result = Math.pow(num1, num2);
+            case "^":
+                power(firstNumber, secondNumber);
                 break;
-
             default:
-                System.out.println("Error: Invalid operator.");
-                validOperation = false;
+                System.out.println("Invalid choice. Try again");
         }
 
-        // 6. Вывод результата
-        if (validOperation) {
-            System.out.printf("Result: %.4f\n", result);
-        }
-
-        // 7. Закрытие Scanner
         scanner.close();
     }
+    public static void plus (double firstNumber, double secondNumber){
+        double result = firstNumber + secondNumber;
+        System.out.println("результат " + result);
+    }
+
+    public static void minus (double firstNumber, double secondNumber){
+        double result = firstNumber - secondNumber;
+        System.out.println("результат " + result);
+    }
+
+    public static void multiply (double firstNumber, double secondNumber){
+        double result = firstNumber * secondNumber;
+        System.out.println("результат " + result);
+    }
+
+    public static void divide (double firstNumber, double secondNumber){
+        if (secondNumber != 0){
+            double result = firstNumber / secondNumber;
+            System.out.println("результат " + result);
+        }else {
+            System.out.println("Ділення на нуль заборонене. Спробуйте ще раз");
+            return;
+        }
+    }
+
+    public static void power (double firstNumber, double secondNumber){
+        double result = Math.pow(firstNumber, secondNumber);
+        System.out.println("Result is: " + result);
+    }
+
 }

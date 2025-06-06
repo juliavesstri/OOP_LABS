@@ -4,82 +4,79 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class task4 {
-    public static void task4 (String[] args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
+        int amountOfCubes;
+        int sum = 0;
 
-        int diceCount = 0;
-        int totalSum = 0;
+        System.out.print("Enter amount of dice to roll: ");
+        amountOfCubes = scanner.nextInt();
 
-        // 4. Запрос количества кубиков
-        do {
-            System.out.print("Enter number of dice to roll (must be > 0): ");
-            while (!scanner.hasNextInt()) {
-                System.out.print("Invalid input. Enter a positive integer: ");
-                scanner.next();
+        if (amountOfCubes <= 0){
+            System.out.println("Invalid amount of dice. Please enter a positive number");
+        } else {
+            for (int i = 0; i < amountOfCubes; i++){
+                int roll = random.nextInt(1, 7);
+                print(roll);
+                sum += roll;
             }
-            diceCount = scanner.nextInt();
-            if (diceCount <= 0) {
-                System.out.println("Number must be greater than zero.");
-            }
-        } while (diceCount <= 0);
-
-        // 6. Цикл имитации бросков кубиков
-        for (int i = 1; i <= diceCount; i++) {
-            int roll = random.nextInt(6) + 1;  // 1..6
-            System.out.println("Dice #" + i + ":");
-            print(roll);  // 7. Вывод ASCII-арта
-            totalSum += roll;
-            System.out.println();
+            System.out.println("Sum of all dice: " + sum);
         }
-
-        // 8. Вывод суммы
-        System.out.println("Total sum of all dice: " + totalSum);
-
-        // 9. Закрытие Scanner
         scanner.close();
     }
 
-    // Метод для вывода ASCII-арта кубика
-    static void print(int roll) {
-        switch (roll) {
-            case 1 -> System.out.println("""
-                    +-------+
-                    |       |
-                    |   o   |
-                    |       |
-                    +-------+""");
-            case 2 -> System.out.println("""
-                    +-------+
-                    | o     |
-                    |       |
-                    |     o |
-                    +-------+""");
-            case 3 -> System.out.println("""
-                    +-------+
-                    | o     |
-                    |   o   |
-                    |     o |
-                    +-------+""");
-            case 4 -> System.out.println("""
-                    +-------+
-                    | o   o |
-                    |       |
-                    | o   o |
-                    +-------+""");
-            case 5 -> System.out.println("""
-                    +-------+
-                    | o   o |
-                    |   o   |
-                    | o   o |
-                    +-------+""");
-            case 6 -> System.out.println("""
-                    +-------+
-                    | o   o |
-                    | o   o |
-                    | o   o |
-                    +-------+""");
-            default -> System.out.println("Invalid dice roll");
+    static void print(int roll){
+        String dice1 = """
+                 -------
+                |       |
+                |   ●   |
+                |       |
+                 -------
+                """;
+        String dice2 = """
+                 -------
+                | ●     |
+                |       |
+                |     ● |
+                 -------
+                """;
+        String dice3 = """
+                 -------
+                | ●     |
+                |   ●   |
+                |     ● |
+                 -------
+                """;
+        String dice4 = """
+                 -------
+                | ●   ● |
+                |       |
+                | ●   ● |
+                 -------
+                """;
+        String dice5 = """
+                 -------
+                | ●   ● |
+                |   ●   |
+                | ●   ● |
+                 -------
+                """;
+        String dice6 = """
+                 -------
+                | ●   ● |
+                | ●   ● |
+                | ●   ● |
+                 -------
+                """;
+        switch (roll){
+            case 1 -> System.out.println(dice1);
+            case 2 -> System.out.println(dice2);
+            case 3 -> System.out.println(dice3);
+            case 4 -> System.out.println(dice4);
+            case 5 -> System.out.println(dice5);
+            case 6 -> System.out.println(dice6);
+
         }
     }
 }
